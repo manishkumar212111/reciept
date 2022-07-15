@@ -1,0 +1,146 @@
+.outer-container {
+  width: 812px;
+  padding: 30px;
+}
+
+.division-container {
+  display: flex;
+  justify-content: space-between;
+  /* border: 1px solid red; */
+}
+
+.company-logo {
+  width: 500px;
+}
+
+.table-outer-container {
+  /* border: 1px solid blue; */
+  width: 45%;
+}
+
+.table-container {
+  border-left: 1px solid grey;
+  border-top: 2px solid grey;
+  border-right: 2px solid grey;
+  border-bottom: 1px solid grey;
+}
+
+.table-col-type-one {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 2px solid grey;
+  padding: 5px;
+  background-image: linear-gradient(to bottom, white, rgb(197, 197, 197));
+}
+
+
+.table-col-type-two {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px;
+  border-bottom: 1px solid rgb(68, 68, 68);
+}
+
+.table-col-type-three {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px;
+}
+
+.division-container-one{
+    display:flex;
+    margin-top : 30px;
+}
+
+.text-container-one{
+    align-self: flex-start;
+    flex : 3;
+}
+
+.text-container{
+    flex : 2;
+}
+
+.bold{
+    font-weight: bold;
+}
+
+.bold-1{
+  font-weight: 500;
+}
+
+p{
+    font-weight: 500;
+}
+
+.empty-div{
+  margin-top: 50px;
+  height: 45px;
+  border-bottom: 2px solid grey;
+  background-image: linear-gradient(to right, white, rgb(202, 202, 202));
+}
+
+.table-container-one{
+  margin-top: 50px;
+}
+
+table{
+  width: 100%;
+}
+
+table, th, td{
+  border: 2px solid rgb(80, 80, 80);
+  border-collapse: collapse;
+  padding: 5px;
+  font-weight : 500;
+}
+
+/* th{
+  font-weight : 400;
+} */
+
+td{
+  text-align: end;
+}
+
+.table-left-text{
+  text-align: start;
+  width : 450px;
+}
+
+.text-center{
+  text-align: center;
+}
+
+.table-no-outline{
+  border : none;
+  width: 250px;
+}
+
+.table-no-outline td {
+  border: none;
+}
+
+.table-td-width{
+  width: 150px;
+  border: 1px solid red;
+}
+
+.table-no-outline tr td:first-child{
+  text-align: start;
+}
+
+.text-container-two{
+  text-align: end;
+}
+
+.space-container{
+  height: 130px;
+}
+
+.text-container-3{
+  text-align: center;
+}
