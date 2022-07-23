@@ -1,36 +1,41 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import { FormControl, InputLabel, MenuItem, Select, TextField } from '@mui/material';
 import axios from 'axios';
 
 const Company = (props) => {
+    const [nip, setNip] = useState("");
+    const [disabled, setDIsabled] = useState(false);
     const handleChange = (e) => {
         props.handleCompanyChange({[e.target.name] : e.target.value});
     };
-
-    useEffect(() => {
-        const api = async () => {
-            let text = `<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:ns="http://CIS/BIR/PUBL/2014/07">
-            <soap:Header xmlns:wsa="http://www.w3.org/2005/08/addressing"> 
-            <wsa:To>https://wyszukiwarkaregontest.stat.gov.pl/wsBIR/UslugaBIRzewnPubl.svc</wsa:To> 
-            <wsa:Action>http://CIS/BIR/PUBL/2014/07/IUslugaBIRzewnPubl/Zaloguj</wsa:Action> </soap:Header>
-            <soap:Body> <ns:Zaloguj>
-            <ns:pKluczUzytkownika>eda04987a39a4f4b8075</ns:pKluczUzytkownika> </ns:Zaloguj>
-            </soap:Body>
-            </soap:Envelope>`;
-            var config = {
-                headers: {'Content-Type': 'application/soap+xml; charset=utf-8'}
-            };
-            let data = axios.post("https://wyszukiwarkaregon.stat.gov.pl/wsBIR/UslugaBIRzewnPubl.svc", text , config);
+    const handleNipApi =async (event) =>{
+        setNip(event.target.value);
+        if(event.target.value.length === 10){
+            setDIsabled(true);
+            const data = await axios.get("http://localhost:5000/company/"+event.target.value);
             console.log(data);
-        }
-
-        api();
-    });
+            if(data?.data?.root?.dane[0]?.ErrorMessageEn){
+                window.alert(data?.data?.root?.dane[0]?.ErrorMessageEn[0]);
+            }
+            // handle data
+            const obj = {};
+            obj['fullName'] = data?.data?.root?.dane[0]?.Nazwa[0];
+            obj['id'] = data?.data?.root?.dane[0]?.Nip[0];
+            obj['city'] = data?.data?.root?.dane[0]?.Powiat[0];
+            props.handleCompanyChange(obj);
+            setDIsabled(false);
+        };
+    };
     const formData = props.formData;
     return(
         <Box sx={{ flexGrow: 1 }}>
+            <Grid style={{marginBottom : 8}} container spacing={2}>
+                <Grid item xs={6}>
+                    <TextField sx={{width : "100%"}} disabled={disabled} value={nip} onChange={handleNipApi} name="nip" label="Search NIP" variant="outlined" />
+                </Grid>
+            </Grid>
             <Grid container spacing={2}>
                 <Grid item xs={3}>
                     <TextField sx={{width : "100%"}} value={formData?.fullName} onChange={handleChange} name="fullName" label="Full Name" variant="outlined" />
