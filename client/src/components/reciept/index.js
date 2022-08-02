@@ -19,12 +19,12 @@ const Index = (props) => {
       type : [document.getElementById("print").offsetWidth, document.getElementById("print").offsetHeight]
     })
   }, []);
-  const product = props.product;
-  const company = props.company;
+  const product = props.product || {};
+  const company = props.company || {};
   return (<>
   <Pdf targetRef={ref} options={options} filename="reciept.pdf" scale={1}>
         {({toPdf, targetRef}) => (
-            <button onClick={toPdf} ref={targetRef}>Generate pdf</button>
+            <button onClick={toPdf} ref={targetRef}>{props.t("Generate pdf")}</button>
         )}
     </Pdf>
     <div className="outer-container" id="print" ref={ref}>
@@ -53,7 +53,7 @@ const Index = (props) => {
           <p>SCOPEWIT Sp. z o. o.</p>
           <p>Gajków, ul. Polna 38</p>
           <p>55-002 Kamieniec Wrocławski</p>
-          <p>NIP: 8982248420</p>
+          <p>NIP: {company.nip}</p>
         </div>
         <div className="text-container">
           <div className="bold">{company.shortName}</div>
@@ -80,7 +80,7 @@ const Index = (props) => {
             <th>Wartość netto</th>
             <th>Wartość brutto</th>
           </tr>
-          {product?.products.map((itm,index) => (<tr>
+          {product?.products?.map((itm,index) => (<tr>
             <td>{index}</td>
             <td className="table-left-text">{itm.name}</td>
             <td>{itm.pkwiu}</td>

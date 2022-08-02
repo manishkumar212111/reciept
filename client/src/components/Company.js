@@ -17,13 +17,17 @@ const Company = (props) => {
             const data = await axios.get("http://localhost:5000/company/"+event.target.value);
             console.log(data);
             if(data?.data?.root?.dane[0]?.ErrorMessageEn){
+                setDIsabled(false);
                 window.alert(data?.data?.root?.dane[0]?.ErrorMessageEn[0]);
+                return;
             }
             // handle data
             const obj = {};
             obj['fullName'] = data?.data?.root?.dane[0]?.Nazwa[0];
             obj['id'] = data?.data?.root?.dane[0]?.Nip[0];
-            obj['city'] = data?.data?.root?.dane[0]?.Powiat[0];
+            obj['city'] = data?.data?.root?.dane[0]?.Miejscowosc[0];
+            obj['code'] = data?.data?.root?.dane[0]?.KodPocztowy[0];
+            obj['street'] = data?.data?.root?.dane[0]?.Ulica[0] +","+ data?.data?.root?.dane[0]?.NrNieruchomosci[0] + " " + data?.data?.root?.dane[0]?.NrLokalu[0] ;
             props.handleCompanyChange(obj);
             setDIsabled(false);
         };
@@ -33,44 +37,44 @@ const Company = (props) => {
         <Box sx={{ flexGrow: 1 }}>
             <Grid style={{marginBottom : 8}} container spacing={2}>
                 <Grid item xs={6}>
-                    <TextField sx={{width : "100%"}} disabled={disabled} value={nip} onChange={handleNipApi} name="nip" label="Search NIP" variant="outlined" />
+                    <TextField sx={{width : "100%"}} disabled={disabled} value={nip} onChange={handleNipApi} name={props.t("nip")} label="Search NIP" variant="outlined" />
                 </Grid>
             </Grid>
             <Grid container spacing={2}>
                 <Grid item xs={3}>
-                    <TextField sx={{width : "100%"}} value={formData?.fullName} onChange={handleChange} name="fullName" label="Full Name" variant="outlined" />
+                    <TextField sx={{width : "100%"}} value={formData?.fullName} onChange={handleChange} name="fullName" label={props.t("Full Name")} variant="outlined" />
                 </Grid>
                 <Grid item xs={3}>
-                    <TextField sx={{width : "100%"}} value={formData?.shortName} onChange={handleChange} name="shortName" label="Short Name" variant="outlined" />
+                    <TextField sx={{width : "100%"}} value={formData?.shortName} onChange={handleChange} name="shortName" label={props.t("Short Name")} variant="outlined" />
                 </Grid>
                 <Grid item xs={3}>
-                    <TextField sx={{width : "100%"}} value={formData?.email} onChange={handleChange} name="email" label="email" variant="outlined" />
+                    <TextField sx={{width : "100%"}} value={formData?.email} onChange={handleChange} name="email" label={props.t("email")} variant="outlined" />
                 </Grid>
                 <Grid item xs={3}>
-                    <TextField sx={{width : "20%"}} value={formData?.taxId} onChange={handleChange} name="taxId" label="taxId" variant="outlined" />
-                    <TextField sx={{width : "80%"}} value={formData?.id} onChange={handleChange} name="id" label="id" variant="outlined" />
+                    <TextField sx={{width : "20%"}} value={formData?.taxId} onChange={handleChange} name="taxId" label={props.t("taxId")} variant="outlined" />
+                    <TextField sx={{width : "80%"}} value={formData?.id} onChange={handleChange} name="id" label={props.t("id")} variant="outlined" />
                 </Grid>
             </Grid>
             <Grid container mt={2} spacing={2}>
                 <Grid item xs={3}>
-                    <TextField sx={{width : "100%"}} value={formData?.code} onChange={handleChange} name="code" label="Code" variant="outlined" />
+                    <TextField sx={{width : "100%"}} value={formData?.code} onChange={handleChange} name="code" label={props.t("Code")} variant="outlined" />
                 </Grid>
                 <Grid item xs={3}>
-                    <TextField sx={{width : "100%"}} value={formData?.city} onChange={handleChange} name="city" label="City" variant="outlined" />
+                    <TextField sx={{width : "100%"}} value={formData?.city} onChange={handleChange} name="city" label={props.t("City")} variant="outlined" />
                 </Grid>
                 <Grid item xs={3}>
-                    <TextField sx={{width : "100%"}} value={formData?.street} onChange={handleChange} name="street" label="Street, House flat" variant="outlined" />
+                    <TextField sx={{width : "100%"}} value={formData?.street} onChange={handleChange} name="street" label={props.t("Street, House flat")} variant="outlined" />
                 </Grid>
                 <Grid item xs={3}>
                     <FormControl fullWidth>
-                        <InputLabel id="demo-simple-select-label">Country</InputLabel>
+                        <InputLabel id="demo-simple-select-label">{props.t("Country")}</InputLabel>
                         <Select
                             labelId="demo-simple-select-label"
                             id="demo-simple-select"
                             value={formData?.country}
                             onChange={handleChange}
                             name="country"
-                            label="Country"
+                            label={props.t("Country")}
                         >
                         <MenuItem value={"Poland"}>Poland</MenuItem>
                         <MenuItem value={"Germany"}>Germany</MenuItem>
@@ -79,7 +83,13 @@ const Company = (props) => {
                     </FormControl>
                 </Grid>
                 <Grid item xs={3}>
-                    <TextField sx={{width : "100%"}} value={formData?.logo} onChange={handleChange} name="logo" label="Enter logo url" variant="outlined" />
+                    <TextField sx={{width : "100%"}} value={formData?.bankName} onChange={handleChange} name="bankName" label={props.t("Bank Acount Name")} variant="outlined" />
+                </Grid>
+                <Grid item xs={3}>
+                    <TextField sx={{width : "100%"}} value={formData?.bankAccountNo} onChange={handleChange} name="bankAccountNo" label={props.t("Bank Account Number")} variant="outlined" />
+                </Grid>
+                <Grid item xs={3}>
+                    <TextField sx={{width : "100%"}} value={formData?.logo} onChange={handleChange} name="logo" label={props.t("Enter logo url")} variant="outlined" />
                 </Grid>
             </Grid>
         </Box>
