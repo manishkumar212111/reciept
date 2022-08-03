@@ -43,8 +43,9 @@ function App() {
         pkwiu: "",
         unit: "",
         qty: 1,
-        discount: "",
-        rate: "",
+        netPrice: 0,
+        discount: 0,
+        rate: 0,
         worthNet: "",
         worthGross: "",
         gtu: ""
@@ -77,7 +78,7 @@ function App() {
         </ul>
       {active == "product" && <Product t={(txt) => translate(txt, language)} formData={formData?.basic} handleProductChange={handleProductChange} />}
       {active == "detail" && <Company t={(txt) => translate(txt, language)} formData={formData?.company} handleCompanyChange={handleCompanyChange} handlePrint={() => setActive("print")}/>}
-      {active == "print" && <PdfWork t={(txt) => translate(txt, language)} company={formData?.company} product={formData?.product} />}
+      {active == "print" && <PdfWork t={(txt) => translate(txt, language)} company={formData?.company} product={formData?.basic} />}
       </div>
 
     </div>

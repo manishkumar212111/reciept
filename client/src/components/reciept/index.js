@@ -81,15 +81,15 @@ const Index = (props) => {
             <th>Wartość brutto</th>
           </tr>
           {product?.products?.map((itm,index) => (<tr>
-            <td>{index}</td>
+            <td>{index + 1}</td>
             <td className="table-left-text">{itm.name}</td>
             <td>{itm.pkwiu}</td>
             <td>{itm.unit}</td>
-            <td>{itm.worthNet}</td>
+            <td>{itm.netPrice}</td>
             <td>{itm.discount}</td>
             <td>{itm.rate}</td>
             <td>{itm.worthNet}</td>
-            <td>{itm.worthNet - itm.discount}</td>
+            <td>{itm.worthGross}</td>
             <td>{itm.worthGross}</td>
           </tr>))}
         </table>
