@@ -1,6 +1,7 @@
 const translations = {
     "Reciepts" : "Paragon",
-    "Company Detail" : "Dane firma",
+    "Seller Company Detail" : "Dane firma",
+    "Buyer Company Detail" : "Dane firma",
     "Product Information" : "Produkt",
     "Print" : "Drukuj",
     "Date Of Issue": "Data wystawienia",
@@ -54,12 +55,14 @@ const translations = {
     "Bank Account Number": " Nr Konto bankowe ",
     "Enter logo url": " Wpisz adres URL logo ",
     "Generate pdf" : " Drukuj plik PDF",
-    "Net Price" : "Net Price"
+    "Net Price" : "Net Price",
+    "Buyer Details" : "Buyer Details",
+    "Seller Details" : "Seller Details",
 };
 
 export const translate = (key, lang) => {
     if(lang === "pl") {
-        return translations[key]
+        return translations[key] || key;
     } else {
         return key;
     }

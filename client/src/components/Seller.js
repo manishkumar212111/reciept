@@ -4,7 +4,7 @@ import Box from '@mui/material/Box';
 import { FormControl, InputLabel, MenuItem, Select, TextField } from '@mui/material';
 import axios from 'axios';
 
-const Company = (props) => {
+const Seller = (props) => {
     const [nip, setNip] = useState("");
     const [disabled, setDIsabled] = useState(false);
     const handleChange = (e) => {
@@ -35,7 +35,7 @@ const Company = (props) => {
     const formData = props.formData;
     return(
         <Box sx={{ flexGrow: 1 }}>
-            <h2>{props.t("Buyer Details")}</h2>
+            <h2>{props.t("Seller Details")}</h2>
             <Grid style={{marginBottom : 8}} container spacing={2}>
                 <Grid item xs={6}>
                     <TextField sx={{width : "100%"}} disabled={disabled} value={nip} onChange={handleNipApi} name={props.t("nip")} label="Search NIP" variant="outlined" />
@@ -98,4 +98,4 @@ const Company = (props) => {
 
 };
 
-export default Company;
+export default Seller;
